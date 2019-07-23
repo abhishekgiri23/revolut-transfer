@@ -28,7 +28,12 @@ public class AccountDaoImpl implements AccountDao {
     private static Logger LOG = Logger.getLogger(AccountDaoImpl.class);
     public static final BigDecimal zeroAmount = new BigDecimal(0).setScale(4, RoundingMode.HALF_EVEN);
     
-    
+    /**
+     * Update the Account Balance
+     * @param account
+     * @return Number of row updated
+     * @throws AccountException
+     */
     @Override
     public int updateAccountBalance(Account account) throws AccountException {
         
@@ -92,6 +97,12 @@ public class AccountDaoImpl implements AccountDao {
         return updateCount;
     }
     
+    /**
+     * Create a Account
+     * @param account
+     * @return Account ID
+     * @throws AccountException
+     */
     @Override
     public long createAccount(Account account) throws AccountException {
         
@@ -128,6 +139,13 @@ public class AccountDaoImpl implements AccountDao {
         }
     }
     
+    /**
+     * Get Account Information by ID
+     * @param accountId
+     * @return Account information {@link Account}
+     * @throws AccountException
+     */
+    @Override
     public Account getAccountById(long accountId) throws AccountException {
         Connection conn = null;
         PreparedStatement stmt = null;

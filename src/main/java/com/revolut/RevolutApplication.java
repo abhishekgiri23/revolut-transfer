@@ -17,6 +17,10 @@ public class RevolutApplication {
         startServer();
     }
     
+    /**
+     * Start the server
+     * @throws Exception
+     */
     private static void startServer() throws Exception {
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);

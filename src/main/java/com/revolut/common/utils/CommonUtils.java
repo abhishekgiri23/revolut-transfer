@@ -22,6 +22,10 @@ public class CommonUtils {
         loadConfig("app.properties");
     }
     
+    /**
+     * Load the config vale from property file
+     * @param fileName
+     */
     public static void loadConfig(String fileName) {
         if (fileName == null) {
             LOG.warn("loadConfig: config file name cannot be null");
@@ -39,6 +43,11 @@ public class CommonUtils {
         }
     }
     
+    /**
+     * get the property value.
+     * @param key
+     * @return
+     */
     public static String getProperty(String key) {
         String value = PROPERTIES.getProperty(key);
         if (value == null) {
@@ -47,6 +56,11 @@ public class CommonUtils {
         return value;
     }
     
+    /**
+     * validate the currency code.
+     * @param inputCode
+     * @return
+     */
     public static boolean validateCurrencyCode(String inputCode) {
         try {
             Currency currency = Currency.getInstance(inputCode);

@@ -25,7 +25,11 @@ public class TransactionDaoImpl implements TransactionDao {
     
     private static final BigDecimal zeroAmount = new BigDecimal(0).setScale(4, RoundingMode.HALF_EVEN);
     
-    
+    /**
+     * Transfer Balance between two accounts.
+     * @param userTransaction
+     * @return Number of row updated
+     */
     @Override
     public int transferAccountBalance(Transaction userTransaction) {
         int result = -1;
@@ -88,6 +92,10 @@ public class TransactionDaoImpl implements TransactionDao {
         return result;
     }
     
+    /**
+     * Transaction Rollback
+     * @param conn
+     */
     private void rollBackTransaction(Connection conn) {
         if (conn != null) {
             try {
@@ -100,6 +108,13 @@ public class TransactionDaoImpl implements TransactionDao {
         throw new TransactionFailedException();
     }
     
+    /**
+     * Get the Source Account (fromAccount) Information.
+     * @param transaction
+     * @param preparedStatement
+     * @return
+     * @throws SQLException
+     */
     private Account getSourceAccountInformation(Transaction transaction, PreparedStatement preparedStatement) throws SQLException {
         Account fromAccount = new Account();
         
@@ -116,6 +131,13 @@ public class TransactionDaoImpl implements TransactionDao {
         
     }
     
+    /**
+     * Get the Destination Account (toAccount) Information.
+     * @param transaction
+     * @param preparedStatement
+     * @return
+     * @throws SQLException
+     */
     private Account getDestinationAccountInformation(Transaction transaction, PreparedStatement preparedStatement) throws SQLException {
         Account toAccount = new Account();
         preparedStatement.setLong(1, transaction.getDestinationAccount());
@@ -131,6 +153,15 @@ public class TransactionDaoImpl implements TransactionDao {
         
     }
     
+    /**
+     * Update the Account balance between two accounts.
+     * @param updateStatement
+     * @param sourceAccountAvailableBalance
+     * @param userTransaction
+     * @param toAccount
+     * @return
+     * @throws SQLException
+     */
     private int updateAccountBalance(PreparedStatement updateStatement, BigDecimal sourceAccountAvailableBalance, Transaction userTransaction, Account toAccount) throws SQLException {
         updateStatement.setBigDecimal(1, sourceAccountAvailableBalance);
         updateStatement.setLong(2, userTransaction.getSourceAccount());

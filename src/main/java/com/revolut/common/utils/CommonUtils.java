@@ -32,7 +32,6 @@ public class CommonUtils {
         } else {
             try {
                 final InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-                //CommonUtils.class.getClass().getClassLoader().getResourceAsStream(fileName);
                 PROPERTIES.load(fis);
                 
             } catch (FileNotFoundException fne) {
